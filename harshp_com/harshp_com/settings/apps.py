@@ -50,4 +50,6 @@ if MODE == 'production' or MODE == 'test_prod':
     ])
 
 elif MODE == 'dev':
-    INSTALLED_APPS.extend([])
+    INSTALLED_APPS.extend([
+        # export Models as ER diagram
+        'django_extensions'])
