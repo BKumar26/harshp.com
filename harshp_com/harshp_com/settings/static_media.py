@@ -17,8 +17,13 @@ THUMBNAIL_PROCESSORS = (
 )
 
 MODE = os.environ.get('HARSHP_COM_MODE', 'dev')
+print("MODE", MODE)
 
 if MODE == 'production' or MODE == 'test_prod':
+    # django-storages | Apache LibCloud | Google Cloud Storage
+    GOOGLE_BUCKET_USER = os.environ.get('HARSHP_COM_GCBUCKET_USER')
+    GOOGLE_BUCKET_PASS = os.environ.get('HARSHP_COM_GCBUCKET_PASS')
+
     # django-storages | boto | AWS S3
     AWS_STORAGE_BUCKET_NAME = 'harshp-staticmedia'
     AWS_ACCESS_KEY_ID = os.environ.get('HARSHP_COM_AWS_ACCESS_KEY')
@@ -30,13 +35,25 @@ if MODE == 'production' or MODE == 'test_prod':
         'Cache-Control': 'max-age=86400',
     }
     # AWS_S3_HOST = 's3.eu-west-1.amazonaws.com'
+    
+    LIBCLOUD_PROVIDERS = {
+        'default': {
+            'type': 'libcloud.storage.types.Provider.GOOGLE_STORAGE',
+            'user': GOOGLE_BUCKET_USER,
+            'key': GOOGLE_BUCKET_PASS,
+            'bucket': 'harshp-admin',
+        }
+    }
+    DEFAULT_FILE_STORAGE = 'storages.backends.apache_libcloud.LibCloudStorage'
+    STATICFILES_STORAGE = 'storages.backends.apache_libcloud.LibCloudStorage'
+    STATIC_URL = 'https://storage.googleapis.com/harshp-admin/'
 
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    # STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    # STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATIC_ROOT = '/static/'
-    MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN + 'media/'
+    # MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN + 'media/'
     MEDIA_ROOT = '/media/'
 
 elif MODE == 'dev':
