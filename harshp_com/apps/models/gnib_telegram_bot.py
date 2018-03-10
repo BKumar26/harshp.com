@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 class TelegramUser(models.Model):

@@ -2,7 +2,7 @@ from django.db import models
 
 
 from utils.meta_generator import create_meta
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from utils.models import get_unique_slug
 
 

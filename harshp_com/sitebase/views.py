@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.core.urlresolvers import resolve
+from django.urls import resolve
 from utils.pagecommons import pagecommon
 from .models import Feedback
 

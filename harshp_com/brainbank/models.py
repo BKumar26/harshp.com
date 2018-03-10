@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import markdown
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from sitebase.editors import EDITOR_TYPES
 from sitebase.markdown_extensions import ext_all
 from utils.models import get_unique_slug
@@ -55,7 +55,8 @@ class BrainbankPost(Post):
     headerimage = models.URLField(max_length=256, blank=True, null=True)
     highlight = models.BooleanField(default=False, db_index=True)
     idea = models.ForeignKey(
-        BrainbankIdea, related_name='posts', db_index=True)
+        BrainbankIdea, related_name='posts', db_index=True,
+        on_delete=models.DO_NOTHING)
 
     class Meta(object):
 

@@ -2,7 +2,7 @@ from django.db import models
 
 from django.utils import timezone
 import markdown
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from sitebase.editors import EDITOR_TYPES
 from sitebase.markdown_extensions import ext_all
 from utils.models import get_unique_slug
@@ -71,7 +71,8 @@ class LifeXIdea(models.Model):
 
     title = models.CharField(max_length=128)
     category = models.ForeignKey(
-        LifeXCategory, related_name='ideas', db_index=True)
+        LifeXCategory, related_name='ideas', db_index=True,
+        on_delete=models.DO_NOTHING)
     short_description = models.CharField(max_length=150)
     body_type = models.CharField(
         max_length=8, choices=EDITOR_TYPES, default='markdown')
@@ -121,9 +122,11 @@ class LifeXExperiment(Post):
     Occurs on a specific Week with a Idea"""
 
     week = models.ForeignKey(
-        LifeXWeek, related_name='experiments', db_index=True)
+        LifeXWeek, related_name='experiments', db_index=True,
+        on_delete=models.DO_NOTHING)
     idea = models.ForeignKey(
-        LifeXIdea, related_name='experiments', db_index=True)
+        LifeXIdea, related_name='experiments', db_index=True,
+        on_delete=models.DO_NOTHING)
     rating = models.IntegerField(
         choices=ratings.scale_5to1,
         default=ratings.scale_5to1_lowest.score, db_index=True)
@@ -170,7 +173,9 @@ class LifeXGoal(models.Model):
     """LifeX Goal - what I want to do  in life"""
 
     title = models.CharField(max_length=128)
-    parent = models.ForeignKey('self', blank=True, null=True, db_index=True)
+    parent = models.ForeignKey(
+            'self', blank=True, null=True, db_index=True,
+            on_delete=models.DO_NOTHING)
     short_description = models.CharField(max_length=150)
     slug = models.SlugField(
         max_length=150, unique=True, blank=True, db_index=True)

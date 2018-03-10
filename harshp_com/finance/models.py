@@ -1,8 +1,7 @@
 from django.db import models
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
-from django.db.models.signals import m2m_changed
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from utils.models import get_unique_slug
 
 
@@ -192,11 +191,14 @@ class Transaction(models.Model):
 
     transaction_type = models.PositiveSmallIntegerField(
         default=EXPENSE, choices=TRANSACTION_TYPES, db_index=True)
-    account = models.ForeignKey(FinanceAccount, related_name='transactions')
+    account = models.ForeignKey(
+            FinanceAccount, related_name='transactions',
+            on_delete=models.DO_NOTHING)
     date = models.DateField(blank=True, db_index=True)
     amount = models.FloatField()
     category = models.ForeignKey(
-        TransactionCategory, related_name='transactions')
+        TransactionCategory, related_name='transactions',
+        on_delete=models.DO_NOTHING)
     tags = models.ManyToManyField(TransactionTag, related_name='transactions')
     note = models.TextField()
 
@@ -292,11 +294,13 @@ class PlannedTransaction(models.Model):
         choices=Transaction.TRANSACTION_TYPES,
         db_index=True)
     account = models.ForeignKey(
-        FinanceAccount, related_name='planned_transactions')
+        FinanceAccount, related_name='planned_transactions',
+        on_delete=models.DO_NOTHING)
     date = models.DateField(blank=True, db_index=True)
     amount = models.FloatField()
     category = models.ForeignKey(
-        TransactionCategory, related_name='planned_transactions')
+        TransactionCategory, related_name='planned_transactions',
+        on_delete=models.DO_NOTHING)
     tags = models.ManyToManyField(
         TransactionTag, related_name='planned_transactions')
     note = models.TextField()
@@ -367,9 +371,11 @@ class TransferTransaction(models.Model):
     and an equivalent income in the second account."""
 
     account_from = models.ForeignKey(
-        FinanceAccount, related_name='transfer_expenses')
+        FinanceAccount, related_name='transfer_expenses',
+        on_delete=models.DO_NOTHING)
     account_to = models.ForeignKey(
-        FinanceAccount, related_name='transfer_incomes')
+        FinanceAccount, related_name='transfer_incomes',
+        on_delete=models.DO_NOTHING)
     date = models.DateField(blank=True, db_index=True)
     amount = models.FloatField()
     note = models.TextField()

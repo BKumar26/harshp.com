@@ -20,11 +20,11 @@ INSTALLED_APPS = [
     # social metadata
     'meta',
     # django-robots: robots.txt
-    'robots',
+    # 'robots',
     # job queue
     'django_cron',
     'django_rq',
-    'django_rq_jobs',
+    # 'django_rq_jobs',
 
     # harshp_com apps
     'blog',

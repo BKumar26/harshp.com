@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import markdown
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from sitebase.editors import EDITOR_TYPES
 from sitebase.markdown_extensions import ext_formatting
 from utils.models import get_unique_slug
@@ -46,7 +46,8 @@ class BlogPost(Post):
     highlight = models.BooleanField(default=False, db_index=True)
     series = models.ForeignKey(
         BlogSeries,
-        blank=True, null=True, default=None, db_index=True)
+        blank=True, null=True, default=None, db_index=True,
+        on_delete=models.DO_NOTHING)
 
     class Meta(object):
 

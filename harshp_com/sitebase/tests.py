@@ -1,7 +1,7 @@
 from autofixture import AutoFixture
 from django.test import Client
 from django.test import TestCase
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from .models import Author
 from .models import Post

@@ -30,7 +30,7 @@ urlpatterns = [
     # url(r'^jet/', include('jet.urls', 'jet')),
     # url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     # robots.txt
-    url(r'^robots\.txt', include('robots.urls')),
+    # url(r'^robots\.txt', include('robots.urls')),
 
     # sitebase
     url(r'', include('sitebase.urls')),
