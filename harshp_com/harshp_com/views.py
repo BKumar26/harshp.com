@@ -38,25 +38,25 @@ def home(request):
 
     latest_posts = sorted(
             chain(
-                _get_latest(BlogPost, 'blog', 10),
-                _get_latest(Poem, 'poem', 10),
-                _get_latest(Story, 'story', 10),
-                _get_latest(DevPost, 'dev', 10),
-                _get_latest(ResearchBlogPost, 'research', 10),
+                _get_latest(BlogPost, 'blog', 5),
+                _get_latest(Poem, 'poem', 5),
+                _get_latest(Story, 'story', 5),
+                _get_latest(DevPost, 'dev', 5),
+                _get_latest(ResearchBlogPost, 'research', 5),
                 ),
             reverse=True,
-            key=lambda p: p[1].date_published)[:10]
+            key=lambda p: p[1].date_published)[:5]
 
     featured_posts = sorted(
             chain(
-                _get_featured(BlogPost, 'blog', 10),
-                _get_featured(Poem, 'poem', 10),
-                _get_featured(Story, 'story', 10),
-                _get_featured(DevPost, 'dev', 10),
-                _get_featured(ResearchBlogPost, 'research', 10),
+                _get_featured(BlogPost, 'blog', 5),
+                _get_featured(Poem, 'poem', 5),
+                _get_featured(Story, 'story', 5),
+                _get_featured(DevPost, 'dev', 5),
+                _get_featured(ResearchBlogPost, 'research', 5),
                 ),
             reverse=True,
-            key=lambda p: p[1].date_published)[:10]\
+            key=lambda p: p[1].date_published)[:5]\
 
     now = datetime.now()
 

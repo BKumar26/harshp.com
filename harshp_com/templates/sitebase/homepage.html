@@ -1,102 +1,68 @@
 {% extends 'sitebase/base.html' %}{% load static from staticfiles %}
 {% block e_TITLE %}homepage | harshp.com{% endblock e_TITLE %}
 {% block e_META_DESCRIPTION %}harshp.com - the personal website and project of Harshvardhan Pandit{% endblock e_META_DESCRIPTION %}
-{% block e_HEADER_TITLE %}Harshvardhan Pandit{% endblock e_HEADER_TITLE %}
-{% block f_HEADER_SUBTITLE %}{% endblock f_HEADER_SUBTITLE %}
-{% block e_HEADER_DESCRIPTION %}
-<div class="tc mt1">
-    <a href="{% url 'stub' %}">Resume</a> |
-    <a href="{% url 'me:home' %}">about me</a> ||
-    <a href="https://github.com/coolharsh55/">Github</a>
-</div>
-{% endblock e_HEADER_DESCRIPTION %}
 {% block e_BODY %}
-<div class="fl w-100">
-    <div class="pa2 tc w-70-ns center">
-        <p class="f6 tc">{{ annotation.content }}
-        <cite class="f5 db">- {{ annotation.book.title }}</cite></p>
-    </div>
-</div>
-<div class="fl w-100 db ph2">
-    <div id='latest' class="fl w-100 w-25-ns pa2 db tc">
-        <h2 class="hot-pink bb b-hot-pink tc">recent</h2>
-        {% for model, post in latest_posts %}
-            <a class="db link" href="{{ post.get_absolute_url }}">
-                {{ post.title }}
-                <span class="f7 silver"><small>{{ model }}</small></span></a>
-        {% endfor %}
-    </div>
+<h1>harshp.com</h1>
+<p><u>navigate:</u> <a href="{% url 'blog:list' %}">blog</a>; <a href="{% url 'me:home' %}">about me</a>; <a href="{% url 'stub' %}">resume</a>; <a href="https://github.com/coolharsh55/">github</a>; <a href="{% url 'research:home' %}">research</a></p>
+<p><u>this page:</u> 
+    <a href="#recent">recent</a>; 
+    <a href="#featured">featured</a>; 
+    <a href="#research">research</a>;
+    <a href="#dev">dev</a>;
+    <a href="#hobbies">hobbies</a>;
+    <a href="#meta">meta</a>;
+    <a href="#personal">personal</a>;
+<blockquote>
+    <p>{{ annotation.content }} <br/>- <em>{{ annotation.book.title }}</em></p>
+</blockquote>
 
-    <div id='featured' class="fl w-100 w-25-ns pa2 db tc">
-        <h2 class="purple bb b-purple tc">featured</h2>
-        {% for model, post in featured_posts %}
-            <a class="db link" href="{{ post.get_absolute_url }}">
-                {{ post.title }}
-                <span class="f7 silver"><small>{{ model }}</small></span></a>
-        {% endfor %}
-    </div>
+<h2 id="recent">recent</h2>
+{% for model, post in latest_posts %}
+<a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <small>({{model}}) {{post.date_published}}</small><br/>
+{% endfor %}
 
-    <div id='hobbies' class='fl w-100 w-25-ns pa2 db tc'>
-        <h2 class="orange bb b--orange tc">hobbies</h2>
-        <a class="db link" href="{% url 'blog:list' %}">blog</a>
-        <a class="db link" href="{% url 'poems:list' %}">poems</a>
-        <a class="db link" href="{% url 'stories:list' %}">stories</a>
-        <a class="db link" href="{% url 'hobbies:books:index' %}">books</a>
-        <a class="db link" href="{% url 'hobbies:videogames:index' %}">video-games</a>
-        <a class="db link" href="{% url 'hobbies:movies:index' %}">movies</a>
-        <a class="db link" href="{% url 'hobbies:music:index' %}">music</a>
-        <a class="db link" href="{% url 'hobbies:photography:index' %}">photography</a>
-        <a class="db link" href="{% url 'hobbies:origami:index' %}">origami</a>
-        <a class="db link" href="{% url 'hobbies:teacoffee:index' %}">tea/coffee</a>
-        <a class="db link" href="{% url 'hobbies:polymathy:index' %}">polymathy</a>
-        <a class="db link" href="{% url 'lifeX:home' %}">lifeX</a>
-    </div>
+<h2 id="featured">featured</h2>
+{% for model, post in featured_posts %}
+<a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <small>({{model}}) {{post.date_published}}</small><br/>
+{% endfor %}
 
-    <div id='research' class="fl w-25-ns pa2 db tc">
-        <h2 class="dark-red bb b--dark-red tc">academia</h2>
-        <a class="db link" href="{% url 'research:home' %}">research</a>
-        <a class="db link" href="{% url 'research:blog:home' %}">research blog</a>
-        <a class="db link" href="{% url 'research:publications' %}">publications</a>
-        <a class="db link" href="{% url 'stub' %}">PhD Research</a>
-        <span class="f6 near-black">My PhD research is regarding compliance with the GDPR. Maintaining provenance records to demonstrate compliance using semantic web ontologies is something I'm researching about.</span>
-    </div>
-</div>
-<div class="fl w-100 ph2">
-    <div id='dev' class="fl w-100 w-25-ns pa2 db tc">
-        <h2 class="dark-green bb b--dark-green tc">dev</h2>
-        <a class="db link" href="{% url 'dev:index' %}">devpage</a>
-        <a class="db link" href="{% url 'dev:guide:index' %}">guides &amp; tutorials</a>
-        <a class="db link" href="{% url 'dev:res:index' %}">resources</a>
-        <a class="db link" href="{% url 'dev:discuss:index' %}">discussions</a>
-        <a class="db link" href="{% url 'dev:mystack:index' %}">my stack</a>
-        <a class="db link" href="{% url 'dev:project:index' %}">projects</a>
-        <a class="db link" href="{% url 'brainbank:list' %}">brainbank</a>
-        <a class="db link" href="{% url 'dev:utils:gnib-appointments' %}">gnib/visa appt. util</a>
-    </div>
+<h2 id="research">research</h2>
+<span>PhD research topic: expressing and evaluating <a target="_blank" href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">GDPR</a> obligations over provenance metadata</span><br/>
+<span>go to: <a href="{% url 'research:home' %}">research section</a>; <a href="{% url 'research:blog:home' %}">research blog</a>; <a class="db link" href="{% url 'research:publications' %}">publications</a></span>
 
-    <div id='finance' class="fl w-100 w-25-ns pa2 db tc">
-        <h2 class="blue bb b--blue tc">finance</h2>
-        <a class="db link" href="{% url 'finance:home' %}">dashboard</a>
-        <a class="db link" href="/personal/finance/monthly-spendings/">monthly spendings</a>
-        <a class="db link" href="/personal/finance/monthly-spendings/{{current_financial_month}}/">current month</a>
-        <a class="db link" href="/manage/finance/financeaccount/">accounts</a>
-        <a class="db link" href="/manage/finance/transaction/">transactions</a>
-    </div>
+<a id="dev" href="{% url 'dev:index' %}"><h2>/dev</h2></a>
+<span><u>articles:</u> 
+<a href="{% url 'dev:guide:index' %}">guides &amp; tutorials</a>; 
+<a href="{% url 'dev:res:index' %}">resources</a>; 
+<a href="{% url 'dev:discuss:index' %}">discussions</a>; </span><br/>
+<span><u>work:</u> 
+<a href="{% url 'dev:mystack:index' %}">my stack</a>; 
+<a href="{% url 'dev:project:index' %}">projects</a>; 
+<a href="{% url 'brainbank:list' %}">brainbank</a>; </span><br/>
+<span><a href="{% url 'dev:utils:gnib-appointments' %}">gnib/visa appt. util</a></span>
 
-    <div id='meta' class="fl w-100 w-25-ns pa2 db tc">
-        <h2 class="purple bb b--purple tc">meta</h2>
-        <a class="db link" href="{% url 'sitebase:discover' %}">discover</a>
-        <a class="db link" href="{% url 'feedback:list' %}">feedback</a>
-        <a class="db link" href="{% url 'sitebase:random' %}">random</a>
-        <a class="db link" href="{% url 'sitebase:search' %}">search</a>
-        <a class="db link" href="{% url 'journal:auth' %}">journal</a>
-        <a class="db link" href="{% url 'sitebase:linkfarm' %}">link-farm</a>
-    </div>
+<h2 id="hobbies">hobbies</h2>
+<span><u>creation:</u> <a href="{% url 'poems:list' %}">poems</a>; <a href="{% url 'stories:list' %}">stories</a>; <a href="{% url 'hobbies:photography:index' %}">photography</a>; <a href="{% url 'hobbies:origami:index' %}">origami</a></span><br/>
+<span><u>consumption:</u> <a href="{% url 'hobbies:movies:index' %}">movies</a>; <a href="{% url 'hobbies:books:index' %}">books</a>; <a href="{% url 'hobbies:videogames:index' %}">video-games</a>; <a href="{% url 'hobbies:music:index' %}">music</a>;</span><br/>
+<span><u>eating:</u> <a href="{% url 'hobbies:teacoffee:index' %}">tea/coffee</a>;</span><br/>
+<span><u>learning:</u> <a href="{% url 'hobbies:polymathy:index' %}">polymathy</a>; <a href="{% url 'lifeX:home' %}">lifeX</a>;</span>
 
-    <div id='help' class="fl w-25-ns pa2 db tc">
-        <h2 class="gold bb b--gold tc">how can I help?</h2>
-        <span class="fw1 moon-silver"><small>I am a jack of all trades, and the master of none; If you need help with something in an area that I'd have/had/will have an interest in, just contact me. I'm always glad to help or just discuss pretty much anything.</small></span>
-    </div>
-</div>
-<div class="db pb2">&nbsp;</div>
+<h2 id="meta">meta</h2>
+<span><u>navigate:</u> 
+<a href="{% url 'sitebase:discover' %}">discover</a>; 
+<a href="{% url 'sitebase:random' %}">random</a>; 
+<a href="{% url 'sitebase:linkfarm' %}">link-farm</a>; </span><br/>
+<span><u>interact:</u> 
+<a href="{% url 'feedback:list' %}">feedback</a>; 
+<a href="{% url 'sitebase:search' %}">search</a>; </span><br/>
+
+<h2 id="personal">personal</h2>
+<span><em>requires authorisation</em></span><br/>
+<a href="{% url 'journal:auth' %}">journal</a>; <br/>
+<span><u>finance:</u> 
+<a href="{% url 'finance:home' %}">dashboard</a>; 
+<a href="/personal/finance/monthly-spendings/">monthly</a>; 
+<a href="/personal/finance/monthly-spendings/{{current_financial_month}}/">current month</a>; 
+<a href="/manage/finance/financeaccount/">accounts</a>; 
+<a href="/manage/finance/transaction/">transactions</a>; 
 {% endblock e_BODY %}
