@@ -39,9 +39,9 @@ hr.stylish:after {
     <form id="feedback-form" action="{% url 'feedback:add' request.path  %}" class="">
         <input id="input-title" type="hidden" name="title" value="">
         <div>
-            <a href="javascript:{}" onclick="document.getElementById('feedback-form').submit();">
+            <button type="submit" onclick="document.getElementById('feedback-form').submit();">
                 Submit feedback
-            </a>
+            </button>
         </div>
     </form>
     <div id="feedbacks">
@@ -56,7 +56,7 @@ hr.stylish:after {
 	{% endif %}
     </div>
     <div>
-	<p><u>Harshvardhan Pandit:</u> <a href="{% url 'me:home' %}">About Me</a> | <a href="https://github.com/coolharsh55/harshp.com/">Source Code</a> | <a href="{% url 'contact' %}">Contact Me</a></p>
+	<p><a href="{% url 'me:home' %}">About Me</a> | <a href="https://github.com/coolharsh55/harshp.com/">Source Code</a> | <a href="{% url 'contact' %}">Contact Me</a></p>
 	<p><u>privacy policy:</u> no data collection, no cookies, no tracking (server logs IP)</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 	</div>
