@@ -16,10 +16,12 @@ def _get_latest(model, string, nos):
     return [(string, item) for item in items]
 
 
-def _get_featured(model, string, nos):
+def _get_featured(model, string, nos=None):
     items = model.objects\
         .filter(is_published=True, highlight=True)\
         .order_by('-date_published')
+    if nos:
+        items = items[:nos]
     return [(string, item) for item in items]
 
 
